@@ -36,9 +36,6 @@ class HelloWorld
     [DllImport("user32.dll")]
     public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
 
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
-
     static void Main()
     {
         var hWnd = CreateWindowEx(
@@ -55,25 +52,8 @@ class HelloWorld
           IntPtr.Zero,
           IntPtr.Zero);
 
-        // Create a button
-        var hWndButton = CreateWindowEx(
-            0,
-            "BUTTON",
-            "Click me!",
-            0x50010001,
-            100,
-            50,
-            100,
-            30,
-            hWnd,
-            IntPtr.Zero,
-            IntPtr.Zero,
-            IntPtr.Zero);
-
         ShowWindow(hWnd, 1);
         UpdateWindow(hWnd);
-        ShowWindow(hWndButton, 1);
-        UpdateWindow(hWndButton);
 
         RECT rect;
         GetClientRect(hWnd, out rect);
