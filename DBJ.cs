@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sharpwin
 {
@@ -16,10 +11,14 @@ namespace sharpwin
         [CallerLineNumber] int lineNumber = 0,
         [CallerMemberName] string caller = null)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\n" + message);
-            Console.ResetColor();
-            Console.WriteLine("\nfile: " + file + "\nline " + lineNumber + "\nfunction:" + caller + "()");
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.WriteLine("\n" + message);
+            //Console.ResetColor();
+            //Console.WriteLine("\nfile: " + file + "\nline " + lineNumber + "\nfunction:" + caller + "()");
+#if DEBUG
+            System.Diagnostics.Debug.WriteLine(message);
+            System.Diagnostics.Debug.WriteLine("\nfile: " + file + "\nline " + lineNumber + "\nfunction:" + caller + "()");
+#endif
         }
 
         static public void Win32ErrMessage(string message,

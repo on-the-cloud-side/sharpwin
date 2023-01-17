@@ -15,9 +15,7 @@ class Program
         //MessagePump messagePump = new MessagePump();  
         //messagePump.CreateMessagePump(IntPtr.Zero, IntPtr.Zero, "some string", 0);  
 
-#if DEBUG
-        System.Console.WriteLine("\n\nDone");
-#endif
+        DBJ.ShowMessage("\n\nDone");
     }
 
     // Reference this page : Using Window Class -http://msdn.microsoft.com/en-us/library/ms633575%28v=VS.85%29.aspx  
@@ -52,9 +50,9 @@ class Program
         wcx.cbSize = Marshal.SizeOf(wcx);
         wcx.style = (int)(ClassStyles.VerticalRedraw | ClassStyles.HorizontalRedraw);
 
-        //unsafe <-- did not manage to make it work
+        unsafe 
         {
-            //IntPtr address = MainWndProc; -- this is not necessary to put inside a Unsafe context  
+            //IntPtr address = MainWndProc; // --this is not necessary to put inside a Unsafe context
             IntPtr address2 = Marshal.GetFunctionPointerForDelegate((Delegate)(WndProc)MainWndProc);
             wcx.lpfnWndProc = address2;
         }
@@ -68,17 +66,6 @@ class Program
         wcx.lpszMenuName = "MainMenu";
         wcx.lpszClassName = "MainWClass";
 
-        //     wcx.hIconSm = LoadImage(hinstance, // small class icon   
-        //MAKEINTRESOURCE(5),  
-        //IMAGE_ICON,  
-        //GetSystemMetrics(SM_CXSMICON),  
-        //GetSystemMetrics(SM_CYSMICON),  
-        //LR_DEFAULTCOLOR);   
-
-        // it might be as this:  
-        //   problems with p/invoke CreateWindowEx() and RegisterClassEx()  
-        //  http://social.msdn.microsoft.com/Forums/vstudio/en-US/8580a805-383b-4b17-8bd8-514da4a5f3a4/problems-with-pinvoke-createwindowex-and-registerclassex   
-        // ATOM?  
         UInt16 ret = WinAPI.RegisterClassEx2(ref wcx);
         if (ret == 0)
         {
@@ -104,7 +91,7 @@ class Program
             //"MainWClass",  <-- buggy?
             atom,
             "Sample",
-            WindowStyles.WS_OVERLAPPED,
+            WindowStyles.WS_OVERLAPPEDWINDOW,
             //Win32_CW_Constant.CW_USEDEFAULT,
             //Win32_CW_Constant.CW_USEDEFAULT,
             //Win32_CW_Constant.CW_USEDEFAULT,
