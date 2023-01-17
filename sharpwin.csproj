@@ -34,10 +34,28 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="readme.md" />
+    <None Include="unused\bluberings_of_some_baboon.md" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="main.cs_PREVIOUS" />
-    <Compile Include="main.cs" />
+    <None Include="unused\main.cs_PREVIOUS" />
+    <None Include="unused\main.cs_SIMPLE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DBJ.cs" />
+    <Compile Include="sharpwin.cs" />
+    <Compile Include="win32api.cs" />
+    <None Include="unused\helloword.cs_UNFINISHED" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
